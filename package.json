@@ -1,0 +1,68 @@
+{
+  "name": "topnote",
+  "version": "0.5.6",
+  "private": true,
+  "type": "module",
+  "description": "A top-edge daily note companion for Windows.",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on http://127.0.0.1:5173 && electron . --dev\"",
+    "build": "tsc -b && vite build",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --win nsis",
+    "dist:portable": "npm run build && electron-builder --win portable"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "9.2.4",
+    "electron": "latest",
+    "electron-builder": "26.15.3",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "wait-on": "latest"
+  },
+  "overrides": {
+    "shell-quote": "^1.11.0",
+    "sprintf-js": "^1.1.4",
+    "tar": "^7.5.21",
+    "katex": "^0.18.2"
+  },
+  "build": {
+    "appId": "com.topnote.desktop",
+    "productName": "顶部笔记",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "TopNote-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "顶部笔记"
+    }
+  },
+  "dependencies": {
+    "@milkdown/crepe": "^7.22.2"
+  }
+}

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b100d" />
+  <meta name="description" content="TopNote 顶部笔记：把学习笔记和备忘录放到视线正上方。" />
+  <title>TopNote · 写下灵感，停在视线之上</title>
+  <style>
+    :root { --bg:#090d0b; --surface:#111713; --surface-2:#171f19; --line:rgba(215,236,217,.12); --text:#edf4ee; --muted:#9aa99d; --green:#a9e58d; --green-2:#6fc37a; --warm:#f1dfbb; --shadow:0 30px 90px rgba(0,0,0,.42); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--text); background:radial-gradient(circle at 74% -12%, #263c2b 0, transparent 35rem), radial-gradient(circle at 0 42%, #16241b 0, transparent 30rem), var(--bg); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; line-height:1.6; overflow-x:hidden; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.2; background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,black,transparent 70%); }
+    a { color:inherit; text-decoration:none; }
+    .shell { width:min(1160px, calc(100% - 40px)); margin:auto; }
+    .nav { height:78px; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:5; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:-.03em; }
+    .brand-mark { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(169,229,141,.3); border-radius:11px; background:#1c2b1d; color:var(--green); font-size:18px; box-shadow:0 8px 28px rgba(92,168,92,.15); }
+    .nav-links { display:flex; gap:28px; color:var(--muted); font-size:14px; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-cta { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:13px; }
+    .github-pill { border:1px solid var(--line); border-radius:999px; padding:9px 14px; transition:.2s ease; }
+    .github-pill:hover { border-color:rgba(169,229,141,.45); color:var(--green); transform:translateY(-1px); }
+    .hero { min-height:680px; padding:94px 0 68px; text-align:center; position:relative; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(169,229,141,.2); border-radius:999px; padding:8px 13px; color:#c5dfbd; background:rgba(46,75,49,.34); font-size:13px; }
+    .eyebrow i { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 16px var(--green); }
+    h1 { max-width:880px; margin:25px auto 19px; font-size:clamp(48px, 8vw, 92px); line-height:1.02; letter-spacing:-.075em; font-weight:740; }
+    h1 em { font-style:normal; color:var(--green); }
+    .hero-copy { max-width:650px; margin:0 auto; color:var(--muted); font-size:18px; }
+    .hero-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin:31px 0 15px; }
+    .button { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-height:48px; padding:0 20px; border-radius:13px; border:1px solid transparent; font-weight:650; font-size:14px; transition:.2s ease; cursor:pointer; }
+    .button.primary { color:#0b120c; background:var(--green); box-shadow:0 12px 34px rgba(143,217,123,.2); }
+    .button.primary:hover { transform:translateY(-2px); box-shadow:0 17px 42px rgba(143,217,123,.3); }
+    .button.ghost { color:var(--text); border-color:var(--line); background:rgba(255,255,255,.035); }
+    .button.ghost:hover { border-color:rgba(169,229,141,.4); background:rgba(169,229,141,.08); }
+    .hero-note { color:#77857a; font-size:12px; }
+    .demo-wrap { position:relative; max-width:1000px; margin:62px auto 0; }
+    .demo-glow { position:absolute; inset:14% 8% -9%; background:radial-gradient(ellipse, rgba(133,222,129,.16), transparent 64%); filter:blur(22px); }
+    .demo-stage { position:relative; overflow:hidden; min-height:460px; border:1px solid rgba(225,244,226,.15); border-radius:24px; background:#080b09; box-shadow:var(--shadow), inset 0 1px rgba(255,255,255,.06); }
+    .browser-top { height:42px; display:flex; align-items:center; gap:7px; padding:0 17px; border-bottom:1px solid var(--line); background:#121814; }
+    .browser-dot { width:8px; height:8px; border-radius:50%; background:#536057; }
+    .browser-url { flex:1; max-width:300px; height:20px; margin-left:8px; border-radius:6px; background:#1b251e; color:#6f7f73; font-size:10px; display:flex; align-items:center; padding:0 9px; }
+    .demo-desktop { display:grid; grid-template-columns:1fr 1.25fr 1fr; gap:18px; padding:36px 40px 48px; opacity:.74; }
+    .demo-card { height:245px; border:1px solid rgba(229,244,229,.09); border-radius:16px; background:linear-gradient(145deg,#152019,#0e130f); padding:18px; color:#afc1b1; transform:translateY(18px); }
+    .demo-card h4 { margin:0 0 16px; color:#e6eee6; font-size:14px; }
+    .demo-line { height:9px; width:80%; border-radius:99px; background:#243329; margin:13px 0; }
+    .demo-line.short { width:52%; }
+    .demo-line.green { background:#5d9662; width:63%; }
+    .floating-note { position:absolute; left:50%; top:50%; width:min(600px,76%); transform:translate(-50%,-42%); border:1px solid rgba(213,242,214,.22); border-radius:18px; background:linear-gradient(145deg,rgba(29,38,30,.98),rgba(12,17,13,.98)); box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(169,229,141,.06); text-align:left; overflow:hidden; animation:floatIn 6.5s ease-in-out infinite; }
+    .note-bar { display:flex; justify-content:space-between; padding:13px 16px; border-bottom:1px solid var(--line); color:#9dae9e; font-size:11px; }
+    .note-status { display:flex; align-items:center; gap:6px; color:#b8d9b5; }
+    .note-status i { width:6px; height:6px; border-radius:50%; background:var(--green); }
+    .note-body { padding:26px 30px 28px; }
+    .note-kicker { color:#8bb57f; letter-spacing:.14em; font-size:10px; text-transform:uppercase; }
+    .note-title { margin:8px 0 14px; color:#edf7ed; font-size:27px; letter-spacing:-.05em; font-weight:680; }
+    .note-text { color:#aab9ac; font-size:13px; margin:0 0 18px; }
+    .note-code { padding:15px; border-radius:11px; background:#0b100c; border:1px solid rgba(255,255,255,.06); color:#c0d6bd; font:12px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .note-tools { display:flex; gap:8px; padding-top:17px; color:#839286; font-size:13px; }
+    .note-tools span { padding:4px 8px; border-radius:7px; background:#172319; }
+    .demo-caption { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:17px 20px; border-top:1px solid var(--line); color:#93a396; font-size:12px; }
+    .replay { border:1px solid var(--line); background:transparent; color:#c9d8cb; border-radius:999px; padding:7px 12px; cursor:pointer; }
+    .replay:hover { border-color:var(--green); color:var(--green); }
+    @keyframes floatIn { 0%,100% { transform:translate(-50%,-42%) scale(.985); } 50% { transform:translate(-50%,-45%) scale(1); } }
+    .section { padding:106px 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:38px; }
+    .section-label { color:var(--green); letter-spacing:.14em; font-size:11px; text-transform:uppercase; }
+    h2 { max-width:620px; margin:9px 0 0; font-size:clamp(30px,4vw,50px); line-height:1.08; letter-spacing:-.055em; }
+    .section-intro { max-width:350px; margin:0; color:var(--muted); font-size:15px; }
+    .feature-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .feature { min-height:220px; padding:22px; border:1px solid var(--line); border-radius:17px; background:linear-gradient(150deg,rgba(255,255,255,.04),rgba(255,255,255,.015)); }
+    .feature-icon { display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:#223323; color:var(--green); font-weight:700; }
+    .feature h3 { margin:25px 0 7px; font-size:17px; letter-spacing:-.03em; }
+    .feature p { margin:0; color:var(--muted); font-size:13px; }
+    .gallery { display:grid; grid-template-columns:1.25fr .75fr; gap:14px; }
+    .shot { overflow:hidden; border:1px solid var(--line); border-radius:20px; background:#0e130f; box-shadow:0 20px 50px rgba(0,0,0,.2); }
+    .shot img { display:block; width:100%; height:100%; min-height:250px; object-fit:cover; object-position:top center; opacity:.9; transition:.35s ease; }
+    .shot:hover img { transform:scale(1.025); opacity:1; }
+    .shot.tall { min-height:420px; }
+    .shot.tall img { min-height:420px; }
+    .cta { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:space-between; gap:30px; padding:45px 48px; border:1px solid rgba(169,229,141,.2); border-radius:24px; background:linear-gradient(120deg,#18281b,#0f1711 62%); }
+    .cta::after { content:""; position:absolute; width:360px; height:360px; right:-110px; top:-150px; border-radius:50%; background:rgba(169,229,141,.13); filter:blur(18px); }
+    .cta h2 { position:relative; z-index:1; max-width:550px; }
+    .cta .button { position:relative; z-index:1; flex:none; }
+    footer { display:flex; justify-content:space-between; gap:20px; padding:30px 0 50px; color:#6f7e72; font-size:12px; border-top:1px solid var(--line); }
+    .toast { position:fixed; left:50%; bottom:25px; z-index:20; transform:translate(-50%,20px); padding:11px 15px; border-radius:999px; color:#0d160e; background:var(--green); font-size:13px; font-weight:700; opacity:0; pointer-events:none; transition:.25s ease; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media (max-width:800px) { .nav-links { display:none; } .nav-cta { margin-left:auto; } .hero { padding-top:65px; min-height:600px; } .demo-desktop { grid-template-columns:1fr; padding:20px; } .demo-card { display:none; } .demo-stage { min-height:400px; } .floating-note { width:88%; } .section-head { display:block; } .section-intro { margin-top:16px; } .feature-grid { grid-template-columns:repeat(2,1fr); } .gallery { grid-template-columns:1fr; } .shot.tall,.shot.tall img { min-height:280px; } .cta { display:block; padding:32px 26px; } .cta .button { margin-top:23px; } }
+    @media (max-width:490px) { .shell { width:min(100% - 28px, 1160px); } h1 { font-size:48px; } .hero-copy { font-size:16px; } .hero-actions .button { width:100%; } .feature-grid { grid-template-columns:1fr; } .demo-caption { align-items:flex-start; flex-direction:column; } .nav { height:68px; } }
+  </style>
+</head>
+<body>
+  <header class="shell nav">
+    <a class="brand" href="#top" aria-label="TopNote 首页"><span class="brand-mark">⌑</span><span>TopNote</span></a>
+    <nav class="nav-links" aria-label="主导航"><a href="#demo">演示</a><a href="#features">功能</a><a href="#screens">界面</a></nav>
+    <div class="nav-cta"><a class="github-pill" href="https://github.com/mortalLi5/TopNote" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+  </header>
+
+  <main id="top">
+    <section class="shell hero">
+      <div class="eyebrow"><i></i> Windows desktop note companion</div>
+      <h1>写下灵感，<em>停在视线之上。</em></h1>
+      <p class="hero-copy">TopNote 是一个从屏幕顶部展开的学习笔记与备忘录工具。记录不打断思路，回顾每天真正学到的东西。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/mortalLi5/TopNote/releases/latest/download/TopNote-Setup-0.5.6.exe" target="_blank" rel="noreferrer" data-download>下载 Windows 版 ↓</a>
+        <a class="button ghost" href="https://github.com/mortalLi5/TopNote" target="_blank" rel="noreferrer">查看 GitHub ↗</a>
+      </div>
+      <div class="hero-note">免费 · 本地保存 · 支持 Markdown · 深色 / 浅色主题</div>
+
+      <div class="demo-wrap" id="demo">
+        <div class="demo-glow"></div>
+        <div class="demo-stage" aria-label="TopNote 产品演示动画">
+          <div class="browser-top"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span><div class="browser-url">topnote · daily memory</div></div>
+          <div class="demo-desktop"><div class="demo-card"><h4>今天 · 2026-10-08</h4><div class="demo-line green"></div><div class="demo-line"></div><div class="demo-line short"></div><div class="demo-line"></div></div><div></div><div class="demo-card"><h4>备忘录</h4><div class="demo-line"></div><div class="demo-line green"></div><div class="demo-line short"></div><div class="demo-line"></div></div></div>
+          <div class="floating-note">
+            <div class="note-bar"><span>顶部笔记 · 学习笔记</span><span class="note-status"><i></i> 已保存</span></div>
+            <div class="note-body"><div class="note-kicker">Today · learn & remember</div><div class="note-title">把重要的东西留在每天</div><p class="note-text">鼠标移到顶部中央，窗口从视线里展开。写完自动保存，第二天继续回看。</p><div class="note-code"># 今天学到了什么？<br><span style="color:#7baa79">- 一个新概念</span><br><span style="color:#c8d7bc">- 一个待验证的问题</span><br><span style="color:#96b28f">- 一点自己的理解</span></div><div class="note-tools"><span>B</span><span><i>I</i></span><span>↗</span><span>☷</span></div></div>
+          </div>
+          <div class="demo-caption"><span>悬停顶部中央 · 展开 · 记录 · 自动保存</span><button class="replay" type="button" id="replay">↻ 重播演示</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section" id="features">
+      <div class="section-head"><div><div class="section-label">Built for focus</div><h2>少一步切换，<br>多一点记住。</h2></div><p class="section-intro">TopNote 把记录动作缩短到几秒钟，让笔记留在你的工作流里，而不是另一个需要打开的窗口。</p></div>
+      <div class="feature-grid">
+        <article class="feature"><div class="feature-icon">↥</div><h3>顶部召回</h3><p>鼠标移到屏幕顶部中央即可展开，窗口自动回到上次的尺寸和位置。</p></article>
+        <article class="feature"><div class="feature-icon">⌘</div><h3>Markdown 编辑</h3><p>标题、列表、代码块和快捷键都在同一个轻量编辑区里完成。</p></article>
+        <article class="feature"><div class="feature-icon">↺</div><h3>每日记忆</h3><p>学习笔记按日期保存，每天结束时自动落盘，回顾时不再从零开始。</p></article>
+        <article class="feature"><div class="feature-icon">≡</div><h3>备忘分组</h3><p>工作、学习、生活分开管理，随手记下的事项也能很快找到。</p></article>
+      </div>
+    </section>
+
+    <section class="shell section" id="screens">
+      <div class="section-head"><div><div class="section-label">A calm workspace</div><h2>暗色是默认，<br>清晰是目的。</h2></div><p class="section-intro">窗口圆角、可移动、可全屏。你可以在偏好设置里切换浅色主题，让它适应一天中的不同光线。</p></div>
+      <div class="gallery"><div class="shot tall"><img src="assets/topnote-dark-notes.png" alt="TopNote 学习笔记界面" /></div><div class="shot"><img src="assets/topnote-dark-memos.png" alt="TopNote 分组备忘录界面" /></div><div class="shot"><img src="assets/topnote-markdown-smoke.png" alt="TopNote Markdown 编辑界面" /></div></div>
+    </section>
+
+    <section class="shell section"><div class="cta"><h2>把下一条笔记，放到你抬眼就能看到的地方。</h2><a class="button primary" href="https://github.com/mortalLi5/TopNote/releases/latest/download/TopNote-Setup-0.5.6.exe" target="_blank" rel="noreferrer" data-download>下载 TopNote</a></div></section>
+  </main>
+
+  <footer class="shell"><span>© 2026 TopNote · made for focused learning</span><a href="https://github.com/mortalLi5/TopNote" target="_blank" rel="noreferrer">GitHub ↗</a></footer>
+  <div class="toast" id="toast">正在打开 GitHub 下载</div>
+  <script>
+    const stage = document.querySelector('.demo-stage');
+    const replay = document.querySelector('#replay');
+    const toast = document.querySelector('#toast');
+    replay.addEventListener('click', () => { stage.classList.remove('replay-now'); void stage.offsetWidth; stage.classList.add('replay-now'); });
+    document.querySelectorAll('[data-download]').forEach((link) => link.addEventListener('click', () => { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2200); }));
+  </script>
+</body>
+</html>
