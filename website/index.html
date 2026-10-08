@@ -51,26 +51,57 @@
     .demo-screen { position:absolute; z-index:3; inset:24px 8% 18px; overflow:hidden; border:1px solid rgba(213,242,214,.24); border-radius:16px; background:#101611; box-shadow:0 25px 55px rgba(0,0,0,.55); opacity:0; transform:translateY(-30px) scale(.94); transition:opacity .42s ease, transform .58s cubic-bezier(.2,.8,.2,1); pointer-events:none; }
     .demo-screen img { display:block; width:100%; height:100%; object-fit:cover; object-position:center top; }
     .demo-screen-badge { position:absolute; left:14px; bottom:12px; padding:7px 10px; border:1px solid rgba(229,244,229,.15); border-radius:999px; color:#eaf5e8; background:rgba(12,18,13,.78); backdrop-filter:blur(10px); font-size:11px; }
+    .demo-app { display:flex; flex-direction:column; color:#dfe8de; background:#111612; }
+    .demo-app.demo-light { color:#374338; background:#f6f4ee; border-color:#d8d9d0; }
+    .mini-titlebar { height:42px; flex:0 0 42px; display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid rgba(231,235,228,.1); background:#151a16; font-size:9px; }
+    .demo-light .mini-titlebar { border-bottom-color:#deded5; background:#fbfaf6; }
+    .mini-brand,.mini-tabs,.mini-actions { display:flex; align-items:center; }
+    .mini-brand { gap:7px; min-width:120px; }
+    .mini-brand b { font-size:10px; letter-spacing:.06em; }
+    .mini-mark { width:17px; height:17px; border-radius:5px; background:#2a3d2c; box-shadow:inset 0 0 0 1px rgba(169,229,141,.2); }
+    .demo-light .mini-mark { background:#dbe8d3; }
+    .mini-tabs { gap:3px; padding:3px; border:1px solid rgba(231,235,228,.1); border-radius:8px; background:#0e120f; }
+    .demo-light .mini-tabs { border-color:#e4e1d8; background:#eeece5; }
+    .mini-tabs span { padding:4px 9px; border-radius:6px; color:#89958a; }
+    .mini-tabs span.active { color:#e1f0dc; background:#304130; }
+    .demo-light .mini-tabs span.active { color:#38502f; background:#fff; box-shadow:0 2px 7px rgba(67,73,60,.12); }
+    .mini-actions { min-width:120px; justify-content:flex-end; color:#89958a; }
+    .mini-workspace { min-height:0; flex:1; display:flex; }
+    .mini-history,.mini-memo-sidebar { width:25%; flex:0 0 25%; padding:16px 12px; border-right:1px solid rgba(231,235,228,.1); background:#141915; }
+    .demo-light .mini-history,.demo-light .mini-memo-sidebar { border-right-color:#deded5; background:#f0eee7; }
+    .mini-history strong,.mini-memo-sidebar strong { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; color:#a3afa5; font-size:10px; }
+    .demo-light .mini-history strong,.demo-light .mini-memo-sidebar strong { color:#6f786e; }
+    .mini-day { display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:8px; border-radius:8px; color:#e5ece4; background:#252c25; font-size:9px; }
+    .demo-light .mini-day { color:#374338; background:#fff; }
+    .mini-day i,.mini-group i { width:6px; height:6px; flex:0 0 6px; border-radius:50%; background:#9fbd8e; }
+    .mini-day small { width:100%; padding-left:12px; color:#7d897e; font-size:8px; }
+    .mini-hint { display:block; margin-top:38px; color:#7d897e; font:9px/1.7 'Microsoft YaHei', sans-serif; text-align:center; }
+    .mini-notes,.mini-memos { min-width:0; flex:1; padding:17px 20px; }
+    .mini-notes > small,.mini-memo-head small { color:#829083; font-size:8px; }
+    .mini-notes h2,.mini-memo-head h2 { margin:13px 0 14px; color:inherit; font:700 20px/1.1 'STZhongsong','Microsoft YaHei',sans-serif; letter-spacing:-.03em; }
+    .mini-editor { min-height:125px; padding:14px 16px; border:1px solid rgba(231,235,228,.1); border-radius:10px; color:#a8b5aa; background:#1c221d; font-size:10px; line-height:1.8; }
+    .demo-light .mini-editor { border-color:#deded5; color:#7d857c; background:#fffefa; }
+    .mini-editor span { display:block; margin-bottom:10px; color:#89958a; }
+    .mini-editor p { margin:4px 0; }
+    .mini-memo-sidebar strong small { min-width:16px; padding:3px 5px; border-radius:7px; background:#252c25; color:#9ca89e; font-size:8px; text-align:center; }
+    .demo-light .mini-memo-sidebar strong small { background:#fff; }
+    .mini-group { display:flex; align-items:center; gap:6px; padding:7px 8px; border-radius:7px; color:#8c988e; font-size:8px; }
+    .mini-group em { margin-left:auto; color:#768176; font-style:normal; }
+    .mini-group.active { color:#e1f0dc; background:#2b392b; }
+    .demo-light .mini-group.active { color:#38502f; background:#dfe9d9; }
+    .mini-memo-head { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+    .mini-memo-head h2 { margin:7px 0 5px; }
+    .mini-memo-head span { color:#829083; font-size:8px; }
+    .mini-memo-head button { border:0; border-radius:7px; padding:7px 10px; color:#dff0d7; background:#2a3d2c; font-size:8px; }
+    .demo-light .mini-memo-head button { color:#38502f; background:#dfe9d9; }
+    .mini-memo-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
+    .mini-memo-cards article { min-height:98px; padding:10px; border:1px solid rgba(231,235,228,.1); border-radius:9px; background:#1a211b; }
+    .demo-light .mini-memo-cards article { border-color:#deded5; background:#fffefa; }
+    .mini-memo-cards b { display:block; margin-bottom:8px; color:inherit; font-size:9px; }
+    .mini-memo-cards p { margin:0 0 12px; color:#98a598; font-size:8px; line-height:1.6; }
+    .mini-memo-cards small { color:#778278; font-size:7px; }
     .demo-stage[data-phase="hidden"] .demo-edge { opacity:1; }
     .demo-stage:not([data-phase="hidden"]) .demo-screen[data-screen="notes-dark"],.demo-stage[data-phase="notes-dark"] .demo-screen[data-screen="notes-dark"],.demo-stage[data-phase="memos-dark"] .demo-screen[data-screen="memos-dark"],.demo-stage[data-phase="notes-light"] .demo-screen[data-screen="notes-light"],.demo-stage[data-phase="memos-light"] .demo-screen[data-screen="memos-light"] { opacity:1; transform:translateY(0) scale(1); }
-    .demo-screen-ui { padding:0; color:#29352b; background:#f4f1e9; }
-    .demo-screen-ui .ui-top { height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; border-bottom:1px solid #d8d8cf; background:#fbfaf6; font-size:11px; }
-    .demo-screen-ui .ui-brand { display:flex; align-items:center; gap:8px; font-weight:700; }
-    .demo-screen-ui .ui-mark { width:18px; height:18px; border-radius:6px; background:#dbe8d3; }
-    .demo-screen-ui .ui-tabs { display:flex; gap:5px; padding:3px; border:1px solid #e4e1d8; border-radius:9px; background:#eeece5; }
-    .demo-screen-ui .ui-tabs span { padding:5px 10px; border-radius:6px; color:#7c827a; }
-    .demo-screen-ui .ui-tabs span.active { color:#38502f; background:#fff; box-shadow:0 2px 7px rgba(67,73,60,.12); }
-    .demo-screen-ui .ui-content { display:grid; grid-template-columns:28% 1fr; gap:18px; padding:22px; height:calc(100% - 44px); }
-    .demo-screen-ui .ui-sidebar { border-right:1px solid #deded5; padding-right:14px; }
-    .demo-screen-ui .ui-sidebar strong { display:block; margin-bottom:12px; font-size:18px; }
-    .demo-screen-ui .ui-group { height:24px; display:flex; align-items:center; gap:6px; margin:3px 0; padding:0 7px; border-radius:6px; color:#737a71; font-size:10px; }
-    .demo-screen-ui .ui-group.active { color:#38502f; background:#dfe9d9; }
-    .demo-screen-ui .ui-group i { width:6px; height:6px; border-radius:50%; background:#9fbd8e; }
-    .demo-screen-ui .ui-main h3 { margin:0 0 12px; font-size:22px; letter-spacing:-.04em; }
-    .demo-screen-ui .ui-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
-    .demo-screen-ui .ui-card { min-height:100px; padding:12px; border:1px solid #dfdfd5; border-radius:11px; background:#fffefa; }
-    .demo-screen-ui .ui-card b { display:block; margin-bottom:8px; font-size:11px; }
-    .demo-screen-ui .ui-card p { margin:0; color:#7e857d; font-size:10px; line-height:1.7; }
     .demo-caption { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:17px 20px; border-top:1px solid var(--line); color:#93a396; font-size:12px; }
     .demo-caption-copy { display:flex; align-items:center; gap:10px; }
     .demo-caption-copy strong { color:#dce9dc; font-weight:650; }
@@ -95,17 +126,34 @@
     .shot:hover img { transform:scale(1.025); opacity:1; }
     .shot.tall { min-height:420px; }
     .shot.tall img { min-height:420px; }
-    .shot-ui { min-height:250px; padding:18px; background:#f4f1e9; color:#344233; }
-    .shot-ui .ui-shot-top { display:flex; align-items:center; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid #d8d8cf; font-size:11px; }
-    .shot-ui .ui-shot-top strong { font-size:16px; }
-    .shot-ui .ui-shot-body { display:grid; grid-template-columns:92px 1fr; gap:12px; padding-top:14px; }
-    .shot-ui .ui-shot-groups { display:grid; gap:5px; }
-    .shot-ui .ui-shot-groups span { padding:6px 7px; border-radius:6px; color:#7b837a; font-size:9px; }
-    .shot-ui .ui-shot-groups span.active { color:#38502f; background:#dfe9d9; }
-    .shot-ui .ui-shot-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
-    .shot-ui .ui-shot-card { min-height:96px; padding:10px; border:1px solid #dddcd2; border-radius:9px; background:#fffefa; }
-    .shot-ui .ui-shot-card b { display:block; margin-bottom:7px; font-size:10px; }
-    .shot-ui .ui-shot-card small { color:#81887f; font-size:9px; line-height:1.6; }
+    .shot-ui { min-height:250px; padding:0; overflow:hidden; }
+    .shot-app { color:#dfe8de; background:#111612; }
+    .shot-app.shot-light { color:#374338; background:#f6f4ee; }
+    .shot-app-top { height:44px; display:flex; align-items:center; justify-content:space-between; padding:0 16px; border-bottom:1px solid rgba(231,235,228,.1); background:#151a16; font-size:9px; }
+    .shot-light .shot-app-top { border-bottom-color:#deded5; background:#fbfaf6; }
+    .shot-app-top strong { font-size:12px; }
+    .shot-app-body { display:grid; grid-template-columns:25% 1fr; min-height:250px; }
+    .shot-app-body aside { padding:17px 12px; border-right:1px solid rgba(231,235,228,.1); background:#141915; font-size:9px; }
+    .shot-light .shot-app-body aside { border-right-color:#deded5; background:#f0eee7; }
+    .shot-app-body aside b { display:block; margin-bottom:13px; color:#a3afa5; font-size:10px; }
+    .shot-light .shot-app-body aside b { color:#6f786e; }
+    .shot-app-body aside span { display:block; padding:7px; border-radius:6px; color:#89958a; }
+    .shot-app-body aside span.active { color:#e1f0dc; background:#2b392b; }
+    .shot-light .shot-app-body aside span.active { color:#38502f; background:#dfe9d9; }
+    .shot-app-body aside span small { display:block; margin:4px 0 0 12px; color:#7d897e; font-size:8px; }
+    .shot-app-body aside i { display:block; margin-top:32px; color:#7d897e; font:8px/1.7 'Microsoft YaHei',sans-serif; text-align:center; }
+    .shot-app-body main { min-width:0; padding:17px 20px; }
+    .shot-app-body main > small { color:#829083; font-size:8px; }
+    .shot-app-body main h3 { margin:12px 0 12px; font:700 20px/1.1 'STZhongsong','Microsoft YaHei',sans-serif; letter-spacing:-.03em; }
+    .shot-editor { min-height:130px; padding:14px 16px; border:1px solid rgba(231,235,228,.1); border-radius:10px; color:#a8b5aa; background:#1c221d; font-size:9px; line-height:1.8; }
+    .shot-light .shot-editor { border-color:#deded5; color:#7d857c; background:#fffefa; }
+    .shot-editor span { display:block; margin-bottom:10px; color:#89958a; }
+    .shot-editor p { margin:4px 0; }
+    .shot-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    .shot-cards article { min-height:110px; padding:10px; border:1px solid rgba(231,235,228,.1); border-radius:9px; background:#1a211b; }
+    .shot-light .shot-cards article { border-color:#deded5; background:#fffefa; }
+    .shot-cards b { display:block; margin-bottom:8px; font-size:9px; }
+    .shot-cards p { margin:0; color:#98a598; font-size:8px; line-height:1.6; }
     .cta { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:space-between; gap:30px; padding:45px 48px; border:1px solid rgba(169,229,141,.2); border-radius:24px; background:linear-gradient(120deg,#18281b,#0f1711 62%); }
     .cta::after { content:""; position:absolute; width:360px; height:360px; right:-110px; top:-150px; border-radius:50%; background:rgba(169,229,141,.13); filter:blur(18px); }
     .cta h2 { position:relative; z-index:1; max-width:550px; }
@@ -114,7 +162,7 @@
     .toast { position:fixed; left:50%; bottom:25px; z-index:20; transform:translate(-50%,20px); padding:11px 15px; border-radius:999px; color:#0d160e; background:var(--green); font-size:13px; font-weight:700; opacity:0; pointer-events:none; transition:.25s ease; }
     .toast.show { opacity:1; transform:translate(-50%,0); }
     @media (max-width:800px) { .nav-links { display:none; } .nav-cta { margin-left:auto; } .hero { padding-top:65px; min-height:600px; } h1 { font-size:clamp(34px, 8vw, 66px); } .demo-stage { min-height:490px; } .demo-canvas { height:375px; margin-inline:12px; } .demo-screen { inset-inline:4%; } .section-head { display:block; } .section-intro { margin-top:16px; } .feature-grid { grid-template-columns:repeat(2,1fr); } .gallery { grid-template-columns:1fr; } .shot.tall,.shot.tall img { min-height:280px; } .cta { display:block; padding:32px 26px; } .cta .button { margin-top:23px; } }
-    @media (max-width:490px) { .shell { width:min(100% - 28px, 1160px); } h1 { font-size:32px; white-space:nowrap; } .hero-copy { font-size:16px; } .hero-actions .button { width:100%; } .feature-grid { grid-template-columns:1fr; } .demo-caption { align-items:flex-start; flex-direction:column; } .demo-caption-copy { width:100%; justify-content:space-between; } .demo-canvas { height:320px; } .demo-screen-ui .ui-content { grid-template-columns:1fr; padding:14px; } .demo-screen-ui .ui-sidebar { display:none; } .nav { height:68px; } }
+    @media (max-width:490px) { .shell { width:min(100% - 28px, 1160px); } h1 { font-size:32px; white-space:nowrap; } .hero-copy { font-size:16px; } .hero-actions .button { width:100%; } .feature-grid { grid-template-columns:1fr; } .demo-caption { align-items:flex-start; flex-direction:column; } .demo-caption-copy { width:100%; justify-content:space-between; } .demo-canvas { height:320px; } .mini-memo-cards,.shot-cards { grid-template-columns:1fr; } .mini-history,.mini-memo-sidebar,.shot-app-body aside { width:30%; flex-basis:30%; } .mini-notes,.mini-memos,.shot-app-body main { padding-inline:12px; } .nav { height:68px; } }
   </style>
 </head>
 <body>
@@ -142,12 +190,21 @@
           <div class="demo-canvas">
             <div class="demo-wall"></div>
             <div class="demo-edge" aria-hidden="true"></div>
-            <div class="demo-screen" data-screen="notes-dark"><img src="assets/topnote-latest-notes-dark.png" alt="深色主题学习笔记" /><span class="demo-screen-badge">01 · 顶部隐藏 → 学习笔记 · 深色</span></div>
-            <div class="demo-screen" data-screen="memos-dark"><img src="assets/topnote-latest-memos-dark.png" alt="深色主题分组备忘录" /><span class="demo-screen-badge">02 · 切换到备忘录 · 分组管理</span></div>
-            <div class="demo-screen" data-screen="notes-light"><img src="assets/topnote-latest-notes-light.png" alt="浅色主题学习笔记与主题设置" /><span class="demo-screen-badge">03 · 偏好设置 → 浅色主题</span></div>
-            <div class="demo-screen demo-screen-ui" data-screen="memos-light">
-              <div class="ui-top"><div class="ui-brand"><span class="ui-mark"></span>顶部笔记</div><div class="ui-tabs"><span>学习笔记</span><span class="active">备忘录</span></div><span>⚙　⌗　⋮</span></div>
-              <div class="ui-content"><aside class="ui-sidebar"><strong>备忘录</strong><div class="ui-group active"><i></i>全部　3</div><div class="ui-group"><i></i>工作　1</div><div class="ui-group"><i></i>学习　1</div><div class="ui-group"><i></i>生活　1</div></aside><div class="ui-main"><h3>全部备忘</h3><div class="ui-cards"><div class="ui-card"><b>整理发布清单</b><p>检查下载按钮、版本号与安装说明。</p></div><div class="ui-card"><b>今天的学习</b><p>把新的概念整理成一条笔记。</p></div><div class="ui-card"><b>周末计划</b><p>留一点时间回顾这周的记录。</p></div></div></div></div>
+            <div class="demo-screen demo-app demo-dark" data-screen="notes-dark">
+              <div class="mini-titlebar"><div class="mini-brand"><span class="mini-mark"></span><b>顶部笔记</b></div><div class="mini-tabs"><span class="active">学习笔记</span><span>备忘录</span></div><div class="mini-actions">⚙　⌗　⋮</div></div>
+              <div class="mini-workspace"><aside class="mini-history"><strong>记忆</strong><span class="mini-day active"><i></i>今天<small>2026-10-08</small></span><span class="mini-hint">从今天开始，<br />时间会替你收好每一页。</span></aside><section class="mini-notes"><small>今天 · 2026-10-08</small><h2>今天学到了什么？</h2><div class="mini-editor"><span>写下一句话……</span><p>— 一个新概念</p><p>— 一个待验证的问题</p><p>— 一点自己的理解</p></div></section></div><span class="demo-screen-badge">01 · 顶部隐藏 → 学习笔记 · 深色</span>
+            </div>
+            <div class="demo-screen demo-app demo-dark" data-screen="memos-dark">
+              <div class="mini-titlebar"><div class="mini-brand"><span class="mini-mark"></span><b>顶部笔记</b></div><div class="mini-tabs"><span>学习笔记</span><span class="active">备忘录</span></div><div class="mini-actions">⚙　⌗　⋮</div></div>
+              <div class="mini-workspace"><aside class="mini-memo-sidebar"><strong>备忘录 <small>3</small></strong><span class="mini-group active"><i></i>全部 <em>3</em></span><span class="mini-group"><i></i>工作 <em>1</em></span><span class="mini-group"><i></i>学习 <em>1</em></span><span class="mini-group"><i></i>生活 <em>1</em></span></aside><section class="mini-memos"><div class="mini-memo-head"><div><small>MEMO · ALL</small><h2>全部备忘</h2><span>0 条待处理 · 3 条记录</span></div><button>＋ 新建</button></div><div class="mini-memo-cards"><article><b>整理发布清单</b><p>检查下载按钮、版本号与安装说明。</p><small>工作 · 已保存</small></article><article><b>今天的学习</b><p>把新的概念整理成一条笔记。</p><small>学习 · 已保存</small></article><article><b>周末计划</b><p>留一点时间回顾这周的记录。</p><small>生活 · 已保存</small></article></div></section></div><span class="demo-screen-badge">02 · 切换到备忘录 · 分组管理</span>
+            </div>
+            <div class="demo-screen demo-app demo-light" data-screen="notes-light">
+              <div class="mini-titlebar"><div class="mini-brand"><span class="mini-mark"></span><b>顶部笔记</b></div><div class="mini-tabs"><span class="active">学习笔记</span><span>备忘录</span></div><div class="mini-actions">⚙　⌗　⋮</div></div>
+              <div class="mini-workspace"><aside class="mini-history"><strong>记忆</strong><span class="mini-day active"><i></i>今天<small>2026-10-08</small></span><span class="mini-hint">从今天开始，<br />时间会替你收好每一页。</span></aside><section class="mini-notes"><small>今天 · 2026-10-08</small><h2>今天学到了什么？</h2><div class="mini-editor"><span>写下一句话……</span><p>— 一个新概念</p><p>— 一个待验证的问题</p><p>— 一点自己的理解</p></div></section></div><span class="demo-screen-badge">03 · 偏好设置 → 浅色主题</span>
+            </div>
+            <div class="demo-screen demo-app demo-light" data-screen="memos-light">
+              <div class="mini-titlebar"><div class="mini-brand"><span class="mini-mark"></span><b>顶部笔记</b></div><div class="mini-tabs"><span>学习笔记</span><span class="active">备忘录</span></div><div class="mini-actions">⚙　⌗　⋮</div></div>
+              <div class="mini-workspace"><aside class="mini-memo-sidebar"><strong>备忘录 <small>3</small></strong><span class="mini-group active"><i></i>全部 <em>3</em></span><span class="mini-group"><i></i>工作 <em>1</em></span><span class="mini-group"><i></i>学习 <em>1</em></span><span class="mini-group"><i></i>生活 <em>1</em></span></aside><section class="mini-memos"><div class="mini-memo-head"><div><small>MEMO · ALL</small><h2>全部备忘</h2><span>0 条待处理 · 3 条记录</span></div><button>＋ 新建</button></div><div class="mini-memo-cards"><article><b>整理发布清单</b><p>检查下载按钮、版本号与安装说明。</p><small>工作 · 已保存</small></article><article><b>今天的学习</b><p>把新的概念整理成一条笔记。</p><small>学习 · 已保存</small></article><article><b>周末计划</b><p>留一点时间回顾这周的记录。</p><small>生活 · 已保存</small></article></div></section></div><span class="demo-screen-badge">04 · 浅色备忘录 · 继续记录</span>
             </div>
           </div>
           <div class="demo-caption"><div class="demo-caption-copy"><strong id="demoCaption">顶部隐藏 · 等待悬停</strong><span class="demo-dots" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i><i></i></span></div><button class="replay" type="button" id="replay">↻ 重播演示</button></div>
@@ -167,7 +224,12 @@
 
     <section class="shell section" id="screens">
       <div class="section-head"><div><div class="section-label">A calm workspace</div><h2>暗色是默认，<br>清晰是目的。</h2></div><p class="section-intro">窗口圆角、可移动、可全屏。你可以在偏好设置里切换浅色主题，让它适应一天中的不同光线。</p></div>
-      <div class="gallery"><div class="shot tall"><img src="assets/topnote-latest-notes-dark.png" alt="TopNote 最新版深色学习笔记界面" /></div><div class="shot"><img src="assets/topnote-latest-memos-dark.png" alt="TopNote 最新版深色分组备忘录界面" /></div><div class="shot"><img src="assets/topnote-latest-notes-light.png" alt="TopNote 最新版浅色主题与设置界面" /></div><div class="shot shot-ui" aria-label="TopNote 浅色分组备忘录界面"><div class="ui-shot-top"><strong>备忘录</strong><span>已保存　＋ 新建</span></div><div class="ui-shot-body"><div class="ui-shot-groups"><span class="active">全部　3</span><span>工作　1</span><span>学习　1</span><span>生活　1</span></div><div class="ui-shot-cards"><div class="ui-shot-card"><b>整理发布清单</b><small>检查下载按钮、版本号与安装说明。</small></div><div class="ui-shot-card"><b>今天的学习</b><small>把新的概念整理成一条笔记。</small></div></div></div></div></div>
+      <div class="gallery">
+        <div class="shot shot-ui shot-app shot-dark tall" aria-label="TopNote 最新版深色学习笔记界面"><div class="shot-app-top"><strong>顶部笔记</strong><span>学习笔记　备忘录　⚙　⌗</span></div><div class="shot-app-body"><aside><b>记忆</b><span class="active">● 今天<small>2026-10-08</small></span><i>从今天开始，<br />时间会替你收好每一页。</i></aside><main><small>今天 · 2026-10-08</small><h3>今天学到了什么？</h3><div class="shot-editor"><span>写下一句话……</span><p>— 一个新概念</p><p>— 一个待验证的问题</p><p>— 一点自己的理解</p></div></main></div></div>
+        <div class="shot shot-ui shot-app shot-dark" aria-label="TopNote 最新版深色分组备忘录界面"><div class="shot-app-top"><strong>顶部笔记</strong><span>学习笔记　<strong>备忘录</strong>　⚙　⌗</span></div><div class="shot-app-body"><aside><b>备忘录　3</b><span class="active">● 全部　3</span><span>● 工作　1</span><span>● 学习　1</span><span>● 生活　1</span></aside><main><small>MEMO · ALL</small><h3>全部备忘</h3><div class="shot-cards"><article><b>整理发布清单</b><p>检查下载按钮、版本号与安装说明。</p></article><article><b>今天的学习</b><p>把新的概念整理成一条笔记。</p></article></div></main></div></div>
+        <div class="shot shot-ui shot-app shot-light" aria-label="TopNote 最新版浅色学习笔记界面"><div class="shot-app-top"><strong>顶部笔记</strong><span>学习笔记　备忘录　⚙　⌗</span></div><div class="shot-app-body"><aside><b>记忆</b><span class="active">● 今天<small>2026-10-08</small></span><i>从今天开始，<br />时间会替你收好每一页。</i></aside><main><small>今天 · 2026-10-08</small><h3>今天学到了什么？</h3><div class="shot-editor"><span>写下一句话……</span><p>— 一个新概念</p><p>— 一个待验证的问题</p><p>— 一点自己的理解</p></div></main></div></div>
+        <div class="shot shot-ui shot-app shot-light" aria-label="TopNote 最新版浅色分组备忘录界面"><div class="shot-app-top"><strong>顶部笔记</strong><span>学习笔记　<strong>备忘录</strong>　⚙　⌗</span></div><div class="shot-app-body"><aside><b>备忘录　3</b><span class="active">● 全部　3</span><span>● 工作　1</span><span>● 学习　1</span><span>● 生活　1</span></aside><main><small>MEMO · ALL</small><h3>全部备忘</h3><div class="shot-cards"><article><b>整理发布清单</b><p>检查下载按钮、版本号与安装说明。</p></article><article><b>今天的学习</b><p>把新的概念整理成一条笔记。</p></article></div></main></div></div>
+      </div>
     </section>
 
     <section class="shell section"><div class="cta"><h2>把下一条笔记，放到你抬眼就能看到的地方。</h2><a class="button primary" href="https://github.com/mortalLi5/TopNote/releases/latest/download/TopNote-Setup-0.5.6.zip" target="_blank" rel="noreferrer" data-download>下载 TopNote</a></div></section>
